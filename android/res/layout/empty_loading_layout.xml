@@ -12,14 +12,25 @@
             android:background="@drawable/icon_loading_bg"
             android:layout_gravity="center_horizontal|center_vertical"
             >
+        <RelativeLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dp">
+            <ImageView
+                    android:id="@+id/empty_progress_view"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:src="@drawable/icon_loading"/>
 
-        <ImageView
-                android:id="@+id/empty_progress_view"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:src="@drawable/icon_loading"
-                android:layout_marginLeft="11dp"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="@dimen/text_size_38"
+                      android:textStyle="bold"
+                      android:layout_centerInParent="true"
+                      android:gravity="center"
+                      android:id="@+id/txt_percentage"/>
+        </RelativeLayout>
 
     </LinearLayout>
+
 
     <LinearLayout
                   android:id="@+id/empty_layout"
