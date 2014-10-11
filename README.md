@@ -64,7 +64,7 @@ Album and Category are most same concept.
 </p>
 
 Server API definition refer to:
-https://github.com/XiaoMi/android_tv_metro/raw/master/server/TVMarketAPI.md
+https://github.com/AiAndroid/android_tv_metro/blob/master/server/TVMarketAPI.md
 
 
 ##Home display data
