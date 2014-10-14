@@ -61,7 +61,7 @@ public class MainMenuController
         {
         	 Resources res = mContext.getResources();
         	 menuTxtMaker = TxtViewFactoryMaker.getInstance().getFactory(
-        			 res.getString(R.string.info_ttf), Color.WHITE, res.getDimensionPixelSize(R.dimen.menu_item_text_size));
+        			 null, Color.WHITE, res.getDimensionPixelSize(R.dimen.menu_item_text_size));
         }
 
         @Override

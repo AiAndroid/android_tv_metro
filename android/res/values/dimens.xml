@@ -48,8 +48,8 @@
     <dimen name="title_divider_top_margin">-1dp</dimen>
 
 
-    <dimen name="ACCOUNT_ITEM_SIZE">93dp</dimen>
-    <dimen name="account_top_margin">65dp</dimen>
+
+
     <dimen name="mine_view_left_margin">3dp</dimen>
     <dimen name="mine_mirror_view_width">201dp</dimen>
     <dimen name="mine_mirror_view_height">100dp</dimen>
@@ -84,4 +84,9 @@
     <dimen name="tab_left_offset">50dp</dimen>
 
     <dimen name="animation_offset_y">16dp</dimen>
+
+    <dimen name="ACCOUNT_ITEM_SIZE">62dp</dimen>
+    <dimen name="account_top_margin">42dp</dimen>
+    <dimen name="account_title_top_margin">14dp</dimen>
+
 </resources>

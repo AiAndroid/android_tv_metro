@@ -1,6 +1,7 @@
 package com.tv.ui.metro.view;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -105,6 +106,9 @@ public class SmoothHorizontalScrollView extends HorizontalScrollView{
         int screenRight = screenLeft + width;
 
         int fadingEdge = this.getResources().getDimensionPixelSize(R.dimen.fading_edge) ;
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            fadingEdge = 0;
+        }
 
         // leave room for left fading edge as long as rect isn't at very left
         if (rect.left > 0) {

@@ -3,16 +3,10 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     
     <string name="app_name">TVAllInOne</string>
-    <string name="fzlt_zhun_hei">FZLTZHUNHEI_GBK.ttf</string>
-	<string name="fzlt_cu_hei">FZLTHC_GBK.ttf</string>
-	
-	<string name="nav_tab_normal_ttf">@string/fzlt_zhun_hei</string>
-	<string name="nav_tab_focus_ttf">@string/fzlt_cu_hei</string>
+
 	
 	<string name="search">搜索</string>
 	<string name="menu_name">菜单</string>
-	<string name="category_title_ttf">FZLTHC_GBK.ttf</string>
-	<string name="info_ttf">FZLTH_GBK.ttf</string>
 
     <string name="empty_data">加载数据失败</string>
     <string name="user_tab">我的应用</string>

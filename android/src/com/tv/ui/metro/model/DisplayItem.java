@@ -120,4 +120,18 @@ public class DisplayItem implements Serializable, Comparable<DisplayItem> {
 			return _ui.layout.y - another._ui.layout.y;
 		}
 	}
+
+
+    public int compareToByY(DisplayItem another) {
+        if (_ui == null || another._ui == null || _ui.layout == null || another._ui.layout == null) {
+            return 0;
+        }
+        if (_ui.layout.y > another._ui.layout.y) {
+            return 1;
+        } else if (_ui.layout.y < another._ui.layout.y) {
+            return -1;
+        } else {
+            return _ui.layout.x - another._ui.layout.x;
+        }
+    }
 }

@@ -1,8 +1,8 @@
-<merge
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:orientation="horizontal" android:weightSum="1">
     <ImageView
            android:id="@+id/back_imageview"
            android:layout_marginLeft="@dimen/title_bar_left_margin"
@@ -17,13 +17,22 @@
     <TextView
             android:id="@+id/titlebar_title"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:gravity="bottom"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:layout_marginLeft="@dimen/title_divider_left_margin"
-            android:layout_marginBottom="@dimen/title_divider_top_margin"
             android:textColor="@color/common_text_color"
             android:ellipsize="end"
             android:textSize="23sp"
             android:singleLine="true"/>
 
-</merge>
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <ImageView android:id="@+id/title_bar_search"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:background="@drawable/icon_menu_search_normal"
+                   android:layout_alignParentRight="true"
+                   android:visibility="invisible"/>
+    </RelativeLayout>
+
+</LinearLayout>

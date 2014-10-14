@@ -14,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/tab_content_container_margin_top"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation"
         android:layout_weight="1"/>
 
     <!-- <com.xiaomi.mibox.gamecenternew.widgets.MiTabHost -->

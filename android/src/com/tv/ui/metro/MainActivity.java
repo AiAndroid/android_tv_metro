@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -193,6 +194,13 @@ public class MainActivity extends FragmentActivity implements MainMenuMgr.OnMenu
             args.putBoolean("user_fragment", true);
             mTabsAdapter.addTab(mTabHost.newTabSpec(mUserTabName).setIndicator(newTabIndicator(getString(R.string.user_tab), mTabs.getTabCount() == 0)), mUserFragmentClass, args);
         }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mTabs.focusCurrentTab(0);
+            }
+        }, 200);
     }
 
     protected boolean isNeedUserTab = true;
@@ -230,6 +238,9 @@ public class MainActivity extends FragmentActivity implements MainMenuMgr.OnMenu
 
     private FixedSpeedScroller scroller=null;
     public void setScrollerTime(int scrollerTime){
+        if(getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE)
+            return;
+
         try {
             if(scroller!=null){
                 scroller.setTime(scrollerTime);
@@ -250,8 +261,10 @@ public class MainActivity extends FragmentActivity implements MainMenuMgr.OnMenu
         View viewC  = View.inflate(this, R.layout.tab_view_indicator_item, null);
 
         TextView view = (TextView)viewC.findViewById(R.id.tv_tab_indicator);
-        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        view.setLayoutParams(lp);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            view.setLayoutParams(lp);
+        }
         view.setText(name);
         mTabs.setPadding(getResources().getDimensionPixelSize(R.dimen.tab_left_offset), 0, 0, 0);
 

@@ -1,20 +1,18 @@
 package com.tv.ui.metro.view;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.tv.ui.metro.R;
-import com.tv.ui.metro.model.Album;
 import com.tv.ui.metro.model.DisplayItem;
 import com.tv.ui.metro.model.GenericAlbum;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class MetroFragment extends Fragment {
     private final String TAG = "MetroFragment";
@@ -35,16 +33,17 @@ public class MetroFragment extends Fragment {
         mMetroLayout.setMetroCursorView((MetroCursorView)v.findViewById(R.id.metrocursor));
         
         mHorizontalScrollView = (SmoothHorizontalScrollView)v.findViewById(R.id.horizontalScrollView);
-        mHorizontalScrollView.setFadingEdgeLength(getResources().getDimensionPixelSize(R.dimen.fading_edge));
-        mHorizontalScrollView.setSmoothScrollingEnabled(true);
-        mHorizontalScrollView.setFillViewport(true);
 
-        //setScrollerTime(400);
 
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            mHorizontalScrollView.setFadingEdgeLength(getResources().getDimensionPixelSize(R.dimen.fading_edge));
+            mHorizontalScrollView.setSmoothScrollingEnabled(true);
+            mHorizontalScrollView.setFillViewport(true);
+            //setScrollerTime(400);
+            mHorizontalScrollView.setTabIndex(tab_index = getArguments().getInt("index", -1));
+            mHorizontalScrollView.setTabCount(tab_count = getArguments().getInt("tab_count", -1));
+        }
         tab = (GenericAlbum<DisplayItem>) this.getArguments().getSerializable("tab");
-        mHorizontalScrollView.setTabIndex(tab_index = getArguments().getInt("index", -1));
-        mHorizontalScrollView.setTabCount(tab_count = getArguments().getInt("tab_count", -1));        
-
         isUserTab = getArguments().getBoolean("user_fragment", false);
         initViews();
         return v;
@@ -52,6 +51,10 @@ public class MetroFragment extends Fragment {
     
     public View addView(View view, int celltype, int row){	
     	return mMetroLayout.addItemView(view, celltype, row);
+    }
+
+    public View addViewPort(View view, int celltype, int x, int y){
+        return mMetroLayout.addItemViewPort(view, celltype, x, y);
     }
 
     public View addView(View view, int celltype, int row, int padding){
@@ -71,9 +74,18 @@ public class MetroFragment extends Fragment {
             }
         }
         else if(tab != null && tab.items != null){
-        	//
-        	Collections.sort(tab.items);
-        	
+
+        	Collections.sort(tab.items, new java.util.Comparator<DisplayItem>(){
+                @Override
+                public int compare(DisplayItem item, DisplayItem item2) {
+                    if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                        return item.compareTo(item2);
+                    }else {
+                       return item.compareToByY(item2);
+                    }
+                }
+            });
+
             for(DisplayItem item:tab.items){
     
                 int type = MetroLayout.Normal;
@@ -81,8 +93,12 @@ public class MetroFragment extends Fragment {
                     type = MetroLayout.Horizontal;
                 else if(item._ui.layout.w == 1 && item._ui.layout.h ==2)
                     type = MetroLayout.Vertical;
-    
-                addView(new RecommendCardView(getActivity(), type).bindData(item),  type,  item._ui.layout.y-1);
+
+                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    addView(new RecommendCardView(getActivity(), type).bindData(item), type, item._ui.layout.y - 1);
+                }else {
+                    addViewPort(new RecommendCardView(getActivity(), type).bindData(item), type, item._ui.layout.x - 1, item._ui.layout.y - 1);
+                }
             }
         }
     }
@@ -105,30 +121,34 @@ public class MetroFragment extends Fragment {
     }
 
     public void scrollToLeft(boolean fullscroll){
-        if(fullscroll) {
-            mHorizontalScrollView.scrollTo(mMetroLayout.getRight(), 0);
-            mHorizontalScrollView.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mHorizontalScrollView.smoothScrollTo(0, 0);
-                }
-            }, 200);
-        }else{
-            mHorizontalScrollView.smoothScrollTo(0, 0);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (fullscroll) {
+                mHorizontalScrollView.scrollTo(mMetroLayout.getRight(), 0);
+                mHorizontalScrollView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mHorizontalScrollView.smoothScrollTo(0, 0);
+                    }
+                }, 200);
+            } else {
+                mHorizontalScrollView.smoothScrollTo(0, 0);
+            }
         }
     }
 
     public void scrollToRight(boolean fullscroll){
-        if(fullscroll) {
-            mHorizontalScrollView.scrollTo(0, 0);
-            mHorizontalScrollView.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mHorizontalScrollView.smoothScrollTo(mMetroLayout.getRight(), 0);
-                }
-            }, 200);
-        }else{
-            mHorizontalScrollView.smoothScrollTo(mMetroLayout.getRight(), 0);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (fullscroll) {
+                mHorizontalScrollView.scrollTo(0, 0);
+                mHorizontalScrollView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mHorizontalScrollView.smoothScrollTo(mMetroLayout.getRight(), 0);
+                    }
+                }, 200);
+            } else {
+                mHorizontalScrollView.smoothScrollTo(mMetroLayout.getRight(), 0);
+            }
         }
     }
 }

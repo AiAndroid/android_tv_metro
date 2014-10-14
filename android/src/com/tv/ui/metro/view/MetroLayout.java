@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -11,7 +12,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import com.tv.ui.metro.R;
 import com.tv.ui.metro.Utils;
-import android.util.Log;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +42,7 @@ public class MetroLayout extends FrameLayout implements View.OnFocusChangeListen
     private static int ITEM_H_HEIGHT  = -1;
     private static int ITEM_NORMAL_SIZE = -1;
     private static int mirror_ref_height= -1;
+    int orientation = Configuration.ORIENTATION_LANDSCAPE;
 
 
     public class Item{
@@ -63,7 +65,8 @@ public class MetroLayout extends FrameLayout implements View.OnFocusChangeListen
 		mContext = context;
 		init();
 	}
-	
+
+
 	private void init(){
         if(ITEM_V_WIDTH == -1){
             DIVIDE_SIZE   = getResources().getDimensionPixelSize(R.dimen.ITEM_DIVIDE_SIZE);
@@ -78,6 +81,8 @@ public class MetroLayout extends FrameLayout implements View.OnFocusChangeListen
 		mDensityScale = 1;//mContext.getResources().getDisplayMetrics().densityDpi/320.0f;
         setClipChildren(false);
         setClipToPadding(false);
+
+        orientation = getResources().getConfiguration().orientation;
 	}
 
 	public View getItemView(int index){
@@ -96,6 +101,67 @@ public class MetroLayout extends FrameLayout implements View.OnFocusChangeListen
         mViewMirrorMap.clear();
         mLeftView = null;
         mRightView = null;
+    }
+
+    public View addItemViewPort(View child, int celltype , int x, int y){
+        return addItemViewPort(child, celltype , x, y, DIVIDE_SIZE);
+    }
+    public View addItemViewPort(View child, int celltype , int x, int y, int padding){
+        if(mLeftView==null){
+            mLeftView = child;
+        }
+
+        child.setFocusable(true);
+        child.setOnFocusChangeListener(this);
+        LayoutParams flp;
+        mViewList.add(new WeakReference<View>(child));
+        View result = child;
+        switch(celltype){
+            case Vertical:
+                flp = new LayoutParams(
+                        (int)(ITEM_V_WIDTH*mDensityScale),
+                        (int)(ITEM_V_HEIGHT*mDensityScale));
+
+                child.setFocusable(true);
+                child.setOnFocusChangeListener(this);
+                child.setTag(R.integer.tag_view_postion, 0);
+                flp.leftMargin = getPaddingLeft()+x*ITEM_NORMAL_SIZE+padding*x;
+                flp.topMargin = getPaddingTop()+ITEM_NORMAL_SIZE*y+padding*y;
+                flp.rightMargin = getPaddingRight();
+                addView(child, flp);
+
+                rowOffset[0]+=ITEM_V_WIDTH*mDensityScale+padding;
+                rowOffset[1]=rowOffset[0];
+                break;
+            case Horizontal:
+                flp = new LayoutParams((int)(ITEM_H_WIDTH*mDensityScale), (int)(ITEM_H_HEIGHT*mDensityScale));
+                flp.leftMargin = getPaddingLeft()+x*ITEM_NORMAL_SIZE+padding*x;
+                flp.topMargin = getPaddingTop()+ITEM_NORMAL_SIZE*y+padding*y;
+                flp.rightMargin = getPaddingRight();
+                child.setFocusable(true);
+                child.setOnFocusChangeListener(this);
+                child.setTag(R.integer.tag_view_postion, 0);
+                addView(child,flp);
+                rowOffset[0]+=ITEM_H_WIDTH*mDensityScale+padding;
+                break;
+            case Normal:
+                flp = new LayoutParams(
+                        (int)(ITEM_NORMAL_SIZE*mDensityScale),
+                        (int)(ITEM_NORMAL_SIZE*mDensityScale));
+
+                flp.leftMargin = getPaddingLeft()+x*ITEM_NORMAL_SIZE+padding*x;
+                flp.topMargin = getPaddingTop()+ITEM_NORMAL_SIZE*y+padding*y;
+                flp.rightMargin = getPaddingRight();
+                child.setFocusable(true);
+                child.setOnFocusChangeListener(this);
+                child.setTag(R.integer.tag_view_postion, 0);
+
+                addView(child,flp);
+                rowOffset[0]+=ITEM_NORMAL_SIZE*mDensityScale+padding;
+                break;
+
+        }
+        return result;
     }
 
     public View addItemView(View child, int celltype , int row, int padding){
