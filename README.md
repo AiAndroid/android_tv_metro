@@ -63,6 +63,10 @@ Album and Category are most same concept.
 <a href="https://raw.githubusercontent.com/AiAndroid/stream/master/tv/game/home.json">Home JSON Sample</a>
 </p>
 
+
+##Mobile App
+<img src="https://github.com/AiAndroid/android_tv_metro/raw/master/design/mobile/mobile_app.png"/>&nbsp;&nbsp;&nbsp;<img src="https://github.com/AiAndroid/android_tv_metro/raw/master/design/mobile/mobile_video.png"/>&nbsp;&nbsp;&nbsp;<img src="https://github.com/AiAndroid/android_tv_metro/raw/master/design/mobile/mobile_video_cate.png"/>&nbsp;&nbsp;&nbsp;
+
 Server API definition refer to:
 https://github.com/AiAndroid/android_tv_metro/blob/master/server/TVMarketAPI.md
 
