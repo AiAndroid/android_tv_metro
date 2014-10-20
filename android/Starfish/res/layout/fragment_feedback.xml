@@ -35,14 +35,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:checked="true"
-            android:text="建议" />
+            android:text="@string/fb_suggestion" />
 
         <RadioButton
             android:id="@+id/radio1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="问题" />
+            android:text="@string/fb_bug" />
     </RadioGroup>
 
     <EditText
@@ -52,7 +52,7 @@
         android:layout_marginBottom="20dp"
         android:ems="10"
         android:text="测试主题"
-        android:hint="主题" >
+        android:hint="@string/fb_subject" >
 
         <requestFocus />
     </EditText>
@@ -73,7 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:ems="10"
-        android:hint="13810139250"
+        android:text="13810139250"
+        android:hint="@string/fb_phone"
         android:inputType="phone" />
 
     <EditText
@@ -82,7 +83,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:ems="10"
-        android:hint="liuhuadong@xiaomi.com"
+        android:text="liuhuadong@xiaomi.com"
+        android:hint="@string/fb_mail"
         android:inputType="textEmailAddress" />
 
     <CheckBox
