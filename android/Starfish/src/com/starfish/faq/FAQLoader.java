@@ -1,4 +1,4 @@
-package com.xiaomi.mitv.starfish;
+package com.starfish.faq;
 
 import android.content.Context;
 import com.tv.ui.metro.loader.TabsGsonLoader;
