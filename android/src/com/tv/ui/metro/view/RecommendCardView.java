@@ -54,6 +54,7 @@ public class RecommendCardView extends RelativeLayout {
 	private int default_background_id;
 
 	private boolean showBannerText = false;
+    private boolean showTitle      = false;
 
 	private DisplayItem mItem;
 	private AnimatorSet mAnimatorSet;
@@ -63,10 +64,16 @@ public class RecommendCardView extends RelativeLayout {
 		mItem = _content;
 
 		showBannerText = UI.METRO_CELL_BANNER.equals(mItem._ui.type);
-		if (!showBannerText) {
+        showTitle      = UI.METRO_CELL_TITLE.equals(mItem._ui.type);
+		if (!showBannerText && !showTitle) {
 			mLabelTextView.setText(mItem.name);
 			mLabelTextView.setVisibility(VISIBLE);
 		}
+
+        if(showTitle){
+            mBannerTextView.setText(mItem.name);
+            mBannerTextView.setVisibility(VISIBLE);
+        }
 
 		bindImageLayer(mItem.images.icon(), mIconView);
 		bindImageLayer(mItem.images.text(), mSubView);
@@ -382,21 +389,25 @@ public class RecommendCardView extends RelativeLayout {
 	@Override
 	protected void onFocusChanged(boolean gainFocus, int direction, Rect previouslyFocusedRect) {
 		super.onFocusChanged(gainFocus, direction, previouslyFocusedRect);
-		if (gainFocus) {
-			if (showBannerText) {
-				mBannerTextView.setText(mItem.name);
-				mBannerTextView.setVisibility(View.VISIBLE);
-                mLabelTextView.setScaleX(1.1f);
-                mLabelTextView.setScaleY(1.1f);
-			}
-			setSelected(true);
-		} else {
-			mBannerTextView.setVisibility(View.INVISIBLE);
-			setSelected(false);
-            mLabelTextView.setScaleX(1.0f);
-            mLabelTextView.setScaleY(1.0f);
+        if(showTitle == false) {
+            if (gainFocus) {
+                if (showBannerText) {
+                    mBannerTextView.setText(mItem.name);
+                    mBannerTextView.setVisibility(View.VISIBLE);
+                    mLabelTextView.setScaleX(1.1f);
+                    mLabelTextView.setScaleY(1.1f);
+                }
+                setSelected(true);
+            } else {
+                if(showTitle == false) {
+                    mBannerTextView.setVisibility(View.INVISIBLE);
+                }
+                setSelected(false);
+                mLabelTextView.setScaleX(1.0f);
+                mLabelTextView.setScaleY(1.0f);
 
-		}
+            }
+        }
 	}
 
 	private void initDimens() {

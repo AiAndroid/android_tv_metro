@@ -38,6 +38,7 @@ public class DisplayItem implements Serializable, Comparable<DisplayItem> {
 		}
 
 		public static final String METRO_CELL_BANNER = "metro_cell_banner";
+        public static final String METRO_CELL_TITLE  = "metro_cell_title";
 		public String type;
 		public Layout layout;
 
@@ -134,5 +135,17 @@ public class DisplayItem implements Serializable, Comparable<DisplayItem> {
         } else {
             return _ui.layout.x - another._ui.layout.x;
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null)
+            return false;
+
+        if(obj instanceof DisplayItem){
+            return  ((DisplayItem)obj).id.equals(id);
+        }
+
+        return  false;
     }
 }
