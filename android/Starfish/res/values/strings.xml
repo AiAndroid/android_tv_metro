@@ -4,4 +4,19 @@
     <string name="feedback_tab">Feedback</string>
     <string name="feedback">Feedback</string>
     <string name="disgnosis">Diagnosis</string>
+
+    <string name="fb_title">意见反馈</string>
+    <string name="fb_suggestion">产品建议</string>
+    <string name="fb_bug">程序错误</string>
+    <string name="fb_subject">主题</string>
+    <string name="fb_msg">描述信息</string>
+    <string name="fb_suggestion_msg">您的宝贵建议，我们将不断改进</string>
+    <string name="fb_error_msg">详细错误描述</string>
+    <string name="fb_phone">电话</string>
+    <string name="fb_mail">邮件</string>
+    <string name="fb_submit">提交</string>
+    <string name="fb_submit_finish">提交成功</string>
+    <string name="fb_tost">请填写xxx</string>
+    <string name="fb_log">上传错误日志</string>
+    <string name="fb_contact">请填写您的联系方式</string>
 </resources>

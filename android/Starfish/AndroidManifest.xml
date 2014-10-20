@@ -17,5 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".FeedbackActivity" />
+
+        <provider
+                android:authorities="com.xiaomi.mitv.idata.client.app.faq"
+                android:name="com.xiaomi.mitv.idata.client.app.iDataProvider"
+                android:grantUriPermissions="true"
+                android:exported="true">
+        </provider>
     </application>
 </manifest>

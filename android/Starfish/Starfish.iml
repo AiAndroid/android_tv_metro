@@ -17,6 +17,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="android" />
     <orderEntry type="library" scope="PROVIDED" name="android-support-v4" level="project" />
+    <orderEntry type="library" name="idatalib" level="project" />
   </component>
 </module>
 

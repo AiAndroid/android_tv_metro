@@ -23,7 +23,7 @@ public class StarfishActivity extends MainActivity {
             @Override
             public ArrayList<View> create(Context context) {
                 ArrayList<View> views = new ArrayList<View>();
-                views.add(new UserView(context, getResources().getString(R.string.feedback), R.drawable.feedback, ""));
+                views.add(new FeedBackUserView(context, getResources().getString(R.string.feedback), R.drawable.feedback, ""));
                 views.add(new UserView(context, getResources().getString(R.string.disgnosis),R.drawable.diagnosis,""));
                 return views;
             }

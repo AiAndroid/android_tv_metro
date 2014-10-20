@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Starfish/Starfish.iml" filepath="$PROJECT_DIR$/Starfish/Starfish.iml" />
       <module fileurl="file://$PROJECT_DIR$/TVMetroSample/TVMetroSample.iml" filepath="$PROJECT_DIR$/TVMetroSample/TVMetroSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/android.iml" filepath="$PROJECT_DIR$/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idatalib/idatalib.iml" filepath="$PROJECT_DIR$/idatalib/idatalib.iml" />
     </modules>
   </component>
 </project>
