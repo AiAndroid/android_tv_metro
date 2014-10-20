@@ -192,7 +192,7 @@ public class MainActivity extends FragmentActivity implements MainMenuMgr.OnMenu
             args.putInt("index",               mTabs.getTabCount());
             args.putInt("tab_count",           content.data.size()+1);
             args.putBoolean("user_fragment", true);
-            mTabsAdapter.addTab(mTabHost.newTabSpec(mUserTabName).setIndicator(newTabIndicator(getString(R.string.user_tab), mTabs.getTabCount() == 0)), mUserFragmentClass, args);
+            mTabsAdapter.addTab(mTabHost.newTabSpec(mUserTabName).setIndicator(newTabIndicator(mUserTabName, mTabs.getTabCount() == 0)), mUserFragmentClass, args);
         }
 
         new Handler().postDelayed(new Runnable() {

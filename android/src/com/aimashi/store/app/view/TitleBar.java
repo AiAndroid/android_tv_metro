@@ -39,15 +39,22 @@ public class TitleBar extends LinearLayout {
     private View.OnClickListener mClickListner;
     public void setBackPressListner(View.OnClickListener clickListener){
         mClickListner = clickListener;
-        findViewById(R.id.back_imageview).setOnClickListener(mClickListner);
+        View view = findViewById(R.id.back_container);
+        if(view != null)view.setOnClickListener(mClickListner);
     }
 
     private void init(Context context){
         LayoutInflater.from(getContext()).inflate(R.layout.title_bar_layout, this);
         mTitleView = (TextView) this.findViewById(R.id.titlebar_title);
 
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            findViewById(R.id.title_bar_search).setVisibility(VISIBLE);
-        }
+        findViewById(R.id.title_bar_search).setOnClickListener(inLineSearchClick);
     }
+
+    View.OnClickListener inLineSearchClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            View ev = findViewById(R.id.album_search);
+            ev.setVisibility(ev.getVisibility() == View.VISIBLE?INVISIBLE:VISIBLE);
+        }
+    };
 }

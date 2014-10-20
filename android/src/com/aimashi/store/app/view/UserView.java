@@ -1,6 +1,7 @@
 package com.aimashi.store.app.view;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import com.tv.ui.metro.R;
 import com.tv.ui.metro.view.MineView;
@@ -18,6 +19,17 @@ public class UserView extends MineView {
         initUI();
         setItemTitle(title);
         setItemSummary(getResources().getString(R.string.mine_info_account_summary_none));
+    }
+
+    public UserView(Context context, String title, int logoRes, String summary) {
+        super(context);
+
+        _activity = (Activity)(context);
+
+        initUI();
+        setLogoPhoto(logoRes);
+        setItemTitle(title);
+        setItemSummary(summary);
     }
 
     private String         mXiaomiId;

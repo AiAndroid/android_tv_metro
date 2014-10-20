@@ -102,7 +102,7 @@ public abstract  class BaseGsonLoader<T> extends Loader<T> {
 
         //load from server
         mIsLoading = true;
-        if (mProgressNotifiable != null) {
+        if (mProgressNotifiable != null && page == 1) {
             mProgressNotifiable.startLoading(dataExists());
         }
         loadDataByGson();

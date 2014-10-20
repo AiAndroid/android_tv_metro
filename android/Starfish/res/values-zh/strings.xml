@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="faq_app_name">常见问题</string>
+    <string name="feedback_tab">在线反馈</string>
+    <string name="feedback">点击反馈</string>
+    <string name="disgnosis">立即诊断</string>
+</resources>

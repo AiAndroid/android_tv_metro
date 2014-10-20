@@ -17,7 +17,7 @@ import android.text.TextUtils;
 public class iDataProvider extends ContentProvider {
     private static final String     TAG              = "iDataProvider";
     public static final String      DATABASE_NAME    = "idata.db";
-    public static final int         DATABASE_VERSION = 1;
+    public static final int         DATABASE_VERSION = 3;
     public static final String      AUTHORITY        = iDataORM.AUTHORITY;
     public static SQLiteOpenHelper mOpenHelper;
 
@@ -59,6 +59,7 @@ public class iDataProvider extends ContentProvider {
                         + " _id      INTEGER PRIMARY KEY AUTOINCREMENT,"
                         + " res_id   TEXT, "
                         + " ns       TEXT,"
+                        + " action   TEXT,"
                         + " value    TEXT,"
                         + " date_time TEXT);");
 
@@ -74,6 +75,12 @@ public class iDataProvider extends ContentProvider {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            try {
+                db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETTINGS);
+                db.execSQL("DROP TABLE IF EXISTS " + TABLE_Favor);
+            }catch (Exception ne){}
+
+            onCreate(db);
         }
 
 

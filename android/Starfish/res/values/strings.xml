@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="faq_app_name">FAQ</string>
+    <string name="feedback_tab">Feedback</string>
+    <string name="feedback">Feedback</string>
+    <string name="disgnosis">Diagnosis</string>
+</resources>

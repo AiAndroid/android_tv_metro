@@ -1,0 +1,10 @@
+<resources>
+
+    <dimen name="tab_left_offset">0dp</dimen>
+
+    <dimen name="tab_content_container_margin_top">30dp</dimen>
+    <dimen name="metro_offside">10dp</dimen>
+    <dimen name="ITEM_V_WIDTH">100dp</dimen>
+
+
+</resources>

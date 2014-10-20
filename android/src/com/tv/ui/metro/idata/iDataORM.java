@@ -49,6 +49,7 @@ public class iDataORM {
             "res_id",
             "ns",
             "value",
+            "action",
             "date_time"
     };
 
@@ -57,6 +58,7 @@ public class iDataORM {
         public static final String RES_ID     = "res_id";
         public static final String NS         = "ns";
         public static final String VALUE      = "value";
+        public static final String Action     = "action";
         public static final String ChangeDate = "date_time";
     }
 
@@ -65,6 +67,7 @@ public class iDataORM {
         public String res_id;
         public String ns;
         public String json;
+        public String action;
         public Object object;
         public String date;
 
@@ -73,34 +76,35 @@ public class iDataORM {
         }
     }
 
-    public static Uri addFavor(Context context, String ns, String res_id, String json){
+    public static Uri addFavor(Context context, String ns, String action,String res_id,  String json){
         Uri ret = null;
         ContentValues ct = new ContentValues();
         ct.put(FavorCol.RES_ID, res_id);
         ct.put(FavorCol.NS,     ns);
         ct.put(FavorCol.VALUE,  json);
+        ct.put(FavorCol.Action,  action);
         ct.put(SettingsCol.ChangeDate, dateToString(new Date()));
         //if exist, update
-        if(true == existFavor(context, ns, res_id)){
-            updateFavor(context, ct);
+        if(true == existFavor(context, ns, action, res_id)){
+            updateFavor(context, action, ct);
         }else{
             ret = context.getContentResolver().insert(FAVOR_CONTENT_URI, ct);
         }
         return ret;
     }
 
-    public static boolean updateFavor(Context context, ContentValues ct) {
+    public static boolean updateFavor(Context context, String action, ContentValues ct) {
         boolean ret = false;
-        String where = String.format(" ns = \'%1$s\' and res_id = \'%2$s\' ", ct.get(FavorCol.NS), ct.get(FavorCol.RES_ID));
+        String where = String.format(" ns = \'%1$s\' and res_id = \'%2$s\' and action=\'%3$s\'", ct.get(FavorCol.NS), ct.get(FavorCol.RES_ID), ct.get(FavorCol.Action));
         if(context.getContentResolver().update(FAVOR_CONTENT_URI, ct, where, null) > 0){
             ret = true;
         }
         return ret;
     }
 
-    public static boolean existFavor(Context context, String ns, String res_id){
+    public static boolean existFavor(Context context, String ns, String action, String res_id){
         boolean exist = false;
-        String where = FavorCol.NS +"='"+ns+"' and " + FavorCol.RES_ID + " ='" + res_id + "'";
+        String where = FavorCol.NS +"='"+ns+"' and " + FavorCol.RES_ID + " ='" + res_id + "' and action='"+action + "'";
         Cursor cursor = context.getContentResolver().query(FAVOR_CONTENT_URI, new String[]{"_id"}, where, null, null);
         if(cursor != null ){
             if(cursor.getCount() > 0){
@@ -112,15 +116,15 @@ public class iDataORM {
         return exist;
     }
 
-    public static int removeFavor(Context context, String ns, String res_id){
-        String where = FavorCol.NS +"='"+ns+"' and " + FavorCol.RES_ID + " ='" + res_id + "'";
+    public static int removeFavor(Context context, String ns, String action, String res_id){
+        String where = FavorCol.NS +"='"+ns+"' and " + FavorCol.RES_ID + " ='" + res_id + "' and action='"+action + "'";
         int lens = context.getContentResolver().delete(FAVOR_CONTENT_URI, where, null);
         return lens;
     }
 
-    public static ArrayList<Favoritor> getFavorites(Context context, String ns){
+    public static ArrayList<Favoritor> getFavorites(Context context, String ns, String action){
         ArrayList<Favoritor> favoritors = new ArrayList<Favoritor>();
-        String where = FavorCol.NS +"='"+ns + "'";
+        String where = FavorCol.NS +"='"+ns + "' and action='" + action + "'";
         Cursor cursor = context.getContentResolver().query(FAVOR_CONTENT_URI, favorProject, where, null, null);
         if(cursor != null ){
             while(cursor.moveToNext()){
@@ -129,6 +133,7 @@ public class iDataORM {
                 item.res_id = cursor.getString(cursor.getColumnIndex(FavorCol.RES_ID));
                 item.ns     = cursor.getString(cursor.getColumnIndex(FavorCol.NS));
                 item.json   = cursor.getString(cursor.getColumnIndex(FavorCol.VALUE));
+                item.action = cursor.getString(cursor.getColumnIndex(FavorCol.Action));
                 item.date   = cursor.getString(cursor.getColumnIndex(FavorCol.ChangeDate));
                 favoritors.add(item);
             }

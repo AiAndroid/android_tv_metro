@@ -1,4 +1,4 @@
-<LinearLayout
+<merge
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -8,7 +8,7 @@
            android:layout_marginLeft="@dimen/title_bar_left_margin"
            android:layout_marginTop="@dimen/title_bar_top_margin"
            android:layout_width="wrap_content" android:layout_height="wrap_content"
-           android:background="@drawable/title_icon_arrow"/>
+           android:background="@drawable/title_icon_arrow" android:contentDescription="back key"/>
 
     <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
                android:background="@drawable/title_divider"
@@ -26,8 +26,15 @@
             android:singleLine="true"/>
 
     <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:singleLine="true"
+                  android:layout_toLeftOf="@+id/title_bar_search"
+                  android:id="@+id/album_search" android:visibility="gone"
+                  android:layout_centerVertical="true"
+                  android:hint="请输入影片名称"/>
 
-        <ImageView android:id="@+id/title_bar_search"
+        <ImageView android:id="@id/title_bar_search"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:background="@drawable/icon_menu_search_normal"
@@ -35,4 +42,4 @@
                    android:visibility="invisible"/>
     </RelativeLayout>
 
-</LinearLayout>
+</merge>
