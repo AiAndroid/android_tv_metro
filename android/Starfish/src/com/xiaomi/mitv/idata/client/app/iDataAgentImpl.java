@@ -33,7 +33,7 @@ public class iDataAgentImpl extends iDataAgent {
 
 
         Log.d(TAG, "do data collection = " + jo.toString());
-        sendDataToDataCenter("soundbarapp", jo.toString());
+        sendDataToDataCenter("tv_faq", jo.toString());
     }
 
     @Override

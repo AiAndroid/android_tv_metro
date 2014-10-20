@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:ems="10"
+        android:text="测试主题"
         android:hint="主题" >
 
         <requestFocus />
@@ -62,6 +63,7 @@
         android:layout_height="100dp"
         android:layout_marginBottom="20dp"
         android:ems="10"
+        android:text="这个软件太好用了"
         android:hint="描述信息"
         android:inputType="textMultiLine" />
 
@@ -71,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:ems="10"
-        android:hint="联系电话"
+        android:hint="13810139250"
         android:inputType="phone" />
 
     <EditText
@@ -80,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:ems="10"
-        android:hint="电子邮件"
+        android:hint="liuhuadong@xiaomi.com"
         android:inputType="textEmailAddress" />
 
     <CheckBox
