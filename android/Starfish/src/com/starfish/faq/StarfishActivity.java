@@ -27,17 +27,19 @@ public class StarfishActivity extends MainActivity {
             @Override
             public ArrayList<View> create(Context context) {
                 ArrayList<View> views = new ArrayList<View>();
-                FeedBackUserView feed = new FeedBackUserView(context, getResources().getString(R.string.feedback), R.drawable.feedback, "");
-                views.add(feed);
+                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    FeedBackUserView feed = new FeedBackUserView(context, getResources().getString(R.string.feedback), R.drawable.feedback, "");
+                    views.add(feed);
 
-                feed.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getBaseContext(), FeedbackActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        getBaseContext().startActivity(intent);
-                    }
-                });
+                    feed.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getBaseContext(), FeedbackActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            getBaseContext().startActivity(intent);
+                        }
+                    });
+                }
 
                 if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                     FeedBackUserView diagnoisis = new FeedBackUserView(context, getResources().getString(R.string.disgnosis), R.drawable.diagnosis, "");
@@ -52,7 +54,7 @@ public class StarfishActivity extends MainActivity {
                 }
                 iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 Picasso.with(getBaseContext()).load("https://github.com/AiAndroid/android_tv_metro/raw/master/android/out/production/Starfish/applink.png").into(iv);
-                //iv.setImageResource(R.drawable.diagnosis);
+
                 views.add(iv);
 
                 return views;
