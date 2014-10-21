@@ -69,8 +69,14 @@ public class MetroFragment extends Fragment {
 
         if(isUserTab == true){
             ArrayList<View> views = createUserView();
+            int Y = 0;
             for(View item: views){
-                addView(item,  MetroLayout.Vertical,  0, UserViewFactory.getInstance().getPadding(getActivity()));
+                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+                    addViewPort(item, MetroLayout.HorizontalMatchWith, 0, Y);
+                    Y++;
+                }else {
+                    addView(item, MetroLayout.Vertical, 0, UserViewFactory.getInstance().getPadding(getActivity()));
+                }
             }
         }
         else if(tab != null && tab.items != null){

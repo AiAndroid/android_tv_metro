@@ -22,6 +22,8 @@ public class MetroLayout extends FrameLayout implements View.OnFocusChangeListen
     public static final int Vertical   = 0; //occupy two vertical cells
     public static final int Horizontal = 1; //occupy two horizontal cells
     public static final int Normal     = 2; //square rectangle
+    public static final int HorizontalMatchWith = 3; //occupy full horizontal cells
+
     
 	Context mContext;
 	int[] rowOffset = new int[2];
@@ -132,6 +134,17 @@ public class MetroLayout extends FrameLayout implements View.OnFocusChangeListen
 
                 rowOffset[0]+=ITEM_V_WIDTH*mDensityScale+padding;
                 rowOffset[1]=rowOffset[0];
+                break;
+            case HorizontalMatchWith:
+                flp = new LayoutParams((int)((ITEM_H_WIDTH + padding + ITEM_NORMAL_SIZE)*mDensityScale), (int)(ITEM_V_HEIGHT*mDensityScale));
+                flp.leftMargin = getPaddingLeft()+x*ITEM_NORMAL_SIZE+padding*x;
+                flp.topMargin = getPaddingTop()+(ITEM_V_HEIGHT)*y+padding*y;
+                flp.rightMargin = getPaddingRight();
+                child.setFocusable(true);
+                child.setOnFocusChangeListener(this);
+                child.setTag(R.integer.tag_view_postion, 0);
+                addView(child,flp);
+                rowOffset[0]+=((ITEM_H_WIDTH + padding + ITEM_NORMAL_SIZE))*mDensityScale+padding;
                 break;
             case Horizontal:
                 flp = new LayoutParams((int)(ITEM_H_WIDTH*mDensityScale), (int)(ITEM_H_HEIGHT*mDensityScale));
