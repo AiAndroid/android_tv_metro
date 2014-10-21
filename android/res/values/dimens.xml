@@ -68,7 +68,7 @@
 
     <dimen name="OPERATOR_MARGIN">3.5dp</dimen>
 
-    <dimen name="metro_item_padding">3.5dp</dimen>
+    <dimen name="metro_item_padding">1.5dp</dimen>
     <dimen name="metro_item_recommend_text_height">20dp</dimen>
     <dimen name="detail_y_distance">282dp</dimen>
     
