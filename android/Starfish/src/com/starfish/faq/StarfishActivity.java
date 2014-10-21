@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import com.squareup.picasso.Picasso;
 import com.tv.ui.metro.MainActivity;
 import com.tv.ui.metro.view.MetroFragment;
 import com.tv.ui.metro.view.UserViewFactory;
@@ -33,6 +34,7 @@ public class StarfishActivity extends MainActivity {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getBaseContext(), FeedbackActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getBaseContext().startActivity(intent);
                     }
                 });
@@ -49,7 +51,8 @@ public class StarfishActivity extends MainActivity {
                     iv.setBackgroundResource(R.drawable.userview_item_bg2);
                 }
                 iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                iv.setImageResource(R.drawable.diagnosis);
+                Picasso.with(getBaseContext()).load("https://github.com/AiAndroid/android_tv_metro/raw/master/android/out/production/Starfish/applink.png").into(iv);
+                //iv.setImageResource(R.drawable.diagnosis);
                 views.add(iv);
 
                 return views;
