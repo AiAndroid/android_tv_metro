@@ -1,9 +1,12 @@
 package com.starfish.faq;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import com.aimashi.store.app.view.UserView;
+import android.widget.ImageView;
 import com.tv.ui.metro.MainActivity;
 import com.tv.ui.metro.view.MetroFragment;
 import com.tv.ui.metro.view.UserViewFactory;
@@ -23,8 +26,32 @@ public class StarfishActivity extends MainActivity {
             @Override
             public ArrayList<View> create(Context context) {
                 ArrayList<View> views = new ArrayList<View>();
-                views.add(new FeedBackUserView(context, getResources().getString(R.string.feedback), R.drawable.feedback, ""));
-                views.add(new UserView(context, getResources().getString(R.string.disgnosis),R.drawable.diagnosis,""));
+                FeedBackUserView feed = new FeedBackUserView(context, getResources().getString(R.string.feedback), R.drawable.feedback, "");
+                views.add(feed);
+
+                feed.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getBaseContext(), FeedbackActivity.class);
+                        getBaseContext().startActivity(intent);
+                    }
+                });
+
+                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    FeedBackUserView diagnoisis = new FeedBackUserView(context, getResources().getString(R.string.disgnosis), R.drawable.diagnosis, "");
+                    views.add(diagnoisis);
+                }
+
+                ImageView iv = new ImageView(getBaseContext());
+                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    iv.setBackground(new ColorDrawable(0Xff99cc00));
+                }else {
+                    iv.setBackgroundResource(R.drawable.userview_item_bg2);
+                }
+                iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                iv.setImageResource(R.drawable.diagnosis);
+                views.add(iv);
+
                 return views;
             }
 
