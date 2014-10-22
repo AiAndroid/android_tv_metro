@@ -14,5 +14,6 @@
 
     <color name="common_text_color">#FFFFFFFF</color>
     <color name="text_color_white_80">#CCFFFFFF</color>
+    <drawable name="press_back">#80ffffff</drawable>
 
 </resources>

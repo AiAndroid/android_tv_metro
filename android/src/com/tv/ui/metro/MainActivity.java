@@ -1,9 +1,5 @@
 package com.tv.ui.metro;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -48,6 +44,10 @@ import com.tv.ui.metro.model.ImageGroup;
 import com.tv.ui.metro.utils.ViewUtils;
 import com.tv.ui.metro.view.*;
 import com.aimashi.store.app.view.UserView;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends FragmentActivity implements MainMenuMgr.OnMenuCancelListener , LoaderManager.LoaderCallbacks<GenericSubjectItem<DisplayItem>> {
     private final static String TAG = "TVMetro-MainActivity";

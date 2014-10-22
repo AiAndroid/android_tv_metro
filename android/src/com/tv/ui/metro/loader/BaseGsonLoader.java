@@ -1,38 +1,24 @@
 package com.tv.ui.metro.loader;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
-import java.net.PortUnreachableException;
-import java.util.Map;
-
 import android.content.Context;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
 import android.util.Log;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
-import com.android.volley.Request.Method;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
+import com.android.volley.*;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
 import com.tv.ui.metro.model.DisplayItem;
+
+import java.io.*;
+import java.lang.reflect.Type;
+import java.util.Map;
 
 /**
  * Created by tv metro on 9/1/14.
  */
 public abstract  class BaseGsonLoader<T> extends Loader<T> {
-    private final  String TAG = "BaseGsonLoader";
+    private final  static String TAG = "BaseGsonLoader";
 
     protected       int page      = 1;
     protected final int page_size = 50;
@@ -143,11 +129,11 @@ public abstract  class BaseGsonLoader<T> extends Loader<T> {
 
     protected abstract void loadDataByGson();
 
-    public class GsonRequest<T> extends Request<T> {
+    public static class GsonRequest<TV> extends Request<TV> {
         private final Gson gson = new Gson();
         private final Type type;
         private final Map<String, String> headers;
-        private final Response.Listener<T> listener;
+        private final Response.Listener<TV> listener;
         private String cacheFile;
 
         public void setCacheNeed(String _cacheFile){
@@ -155,7 +141,7 @@ public abstract  class BaseGsonLoader<T> extends Loader<T> {
         }
 
         public GsonRequest(String url, Type type, Map<String, String> headers,
-                           Response.Listener<T> listener, Response.ErrorListener errorListener) {
+                           Response.Listener<TV> listener, Response.ErrorListener errorListener) {
             super(Method.GET, url, errorListener);
             this.type = type;
             this.headers = headers;
@@ -168,20 +154,20 @@ public abstract  class BaseGsonLoader<T> extends Loader<T> {
         }
 
         @Override
-        protected void deliverResponse(T response) {
+        protected void deliverResponse(TV response) {
             listener.onResponse(response);
         }
 
         @Override
-        protected Response<T> parseNetworkResponse(NetworkResponse response) {
+        protected Response<TV> parseNetworkResponse(NetworkResponse response) {
             try {
                 String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
                 Log.d(TAG, "response json:" + json);
                 long timeStart = System.currentTimeMillis();
-                T fromJson = gson.fromJson(json, type);
+                TV fromJson = gson.fromJson(json, type);
                 long timeEnd = System.currentTimeMillis();
                 Log.d(TAG, "fromJson take time in ms: " + (timeEnd - timeStart));
-                Response<T> res =  Response.success(fromJson, HttpHeaderParser.parseCacheHeaders(response));
+                Response<TV> res =  Response.success(fromJson, HttpHeaderParser.parseCacheHeaders(response));
 
                 if(mEnableCache && cacheFile != null && cacheFile.length() > 0){
                     //save to files
