@@ -1,9 +1,10 @@
 package com.tv.ui.metro;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 
 /**
  * Created by liuhuadong on 7/29/14.
  */
-public class SearchActivty extends Activity {
+public class SearchActivty extends FragmentActivity {
+
 }

@@ -12,4 +12,5 @@
 
     <string name="mine_info_account_title">Account information</string>
     <string name="mine_info_account_summary_none">Not login</string>
+    <string name="share">Share</string>
 </resources>

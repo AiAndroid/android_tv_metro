@@ -4,7 +4,7 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"  android:background="@drawable/actionbar_bg">
 
-    <RelativeLayout android:id="@+id/back_container" android:layout_width="48dp" android:clickable="true" android:layout_height="48dp" android:background="@drawable/btn_item_bg">
+    <RelativeLayout android:id="@+id/back_container" android:layout_width="48dp" android:clickable="true" android:layout_height="48dp" android:background="@drawable/list_selector_bg">
           <ImageView
            android:id="@+id/back_imageview"
            android:layout_width="15dp"
@@ -17,6 +17,7 @@
     <TextView
             android:id="@+id/titlebar_title"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:maxWidth="150dp"
             android:gravity="center_vertical"
             android:textColor="@color/common_text_color"
             android:ellipsize="end"
@@ -35,20 +36,51 @@
                   android:layout_centerVertical="true"
                   android:hint="请输入搜索关键字"/>
 
-        <ImageView android:id="@id/title_bar_search"
-                   android:layout_width="48dp"
-                   android:layout_height="48dp"
-                   android:background="@drawable/icon_menu_search_normal"
-                   android:layout_alignParentRight="true"
-                   android:scaleType="centerCrop"
-                   android:visibility="invisible"/>
 
-        <ImageView android:id="@+id/title_bar_tv_connected"
-                   android:layout_width="48dp"
-                   android:layout_height="48dp"
-                   android:background="@drawable/ic_tv_connected"
-                   android:layout_alignParentRight="true"
-                   android:scaleType="centerCrop"
-                   android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@id/title_bar_search"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/icon_menu_search_normal"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerCrop"
+            android:background="?attr/buttonSelectableBackground"
+            android:visibility="gone"/>
+
+        <ProgressBar android:id="@+id/progress_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@+id/right_region">
+        </ProgressBar>
+
+        <LinearLayout
+            android:id="@id/right_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+            <ImageView android:id="@+id/title_bar_share"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_menu_share"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/title_bar_tv_connected"
+                android:background="?attr/buttonSelectableBackground"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@id/title_bar_tv_connected"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_tv_connected"
+                android:background="?attr/buttonSelectableBackground"
+                android:scaleType="centerCrop"
+                android:visibility="gone"/>
+        </LinearLayout>
+
     </RelativeLayout>
 </merge>

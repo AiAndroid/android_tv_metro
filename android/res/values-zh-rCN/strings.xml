@@ -13,4 +13,5 @@
 
     <string name="mine_info_account_title">帐号信息</string>
     <string name="mine_info_account_summary_none">您还没有登录</string>
+    <string name="share">分享</string>
 </resources>

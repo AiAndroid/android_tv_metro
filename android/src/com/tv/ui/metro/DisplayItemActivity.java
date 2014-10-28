@@ -2,12 +2,12 @@ package com.tv.ui.metro;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
 import com.tv.ui.metro.loader.BaseGsonLoader;
 import com.tv.ui.metro.model.DisplayItem;
 import com.tv.ui.metro.view.EmptyLoadingView;
@@ -24,6 +24,11 @@ public class DisplayItemActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            //when user start portrait, lock the screen orientation
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        }
 
         Intent data = getIntent();
 

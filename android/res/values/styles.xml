@@ -4,7 +4,13 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
+        <item name="buttonSelectableBackground">@drawable/list_selector_bg</item>
     </style>
+
+    <style name="TabsTheme" parent="AppBaseTheme">
+        <item name="buttonSelectableBackground">@drawable/list_selector_bg</item>
+    </style>
+
     
     <style name="TvDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>

@@ -11,4 +11,6 @@
         <attr name="ttf_name" format="string" />
     </declare-styleable>
 
+    <attr name="buttonSelectableBackground" format="reference"/>
+
 </resources>

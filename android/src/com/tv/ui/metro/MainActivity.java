@@ -6,33 +6,18 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.LoaderManager;
+import android.support.v4.app.*;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewStub;
+import android.view.*;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
-import android.widget.TabHost;
-import android.widget.TabWidget;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
+import com.aimashi.store.app.view.UserView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tv.ui.metro.loader.BaseGsonLoader;
@@ -42,8 +27,10 @@ import com.tv.ui.metro.model.DisplayItem;
 import com.tv.ui.metro.model.GenericSubjectItem;
 import com.tv.ui.metro.model.ImageGroup;
 import com.tv.ui.metro.utils.ViewUtils;
-import com.tv.ui.metro.view.*;
-import com.aimashi.store.app.view.UserView;
+import com.tv.ui.metro.view.EmptyLoadingView;
+import com.tv.ui.metro.view.MetroFragment;
+import com.tv.ui.metro.view.RecommendCardViewClickListenerFactory;
+import com.tv.ui.metro.view.UserViewFactory;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -398,7 +385,7 @@ public class MainActivity extends FragmentActivity implements MainMenuMgr.OnMenu
         }
     }
 
-    protected String dataSchemaForSearchString = "misearch://applicationsearch/";
+    protected String dataSchemaForSearchString = "tvschema://video/search";
     protected void setSeachSchema(String schema){
     	dataSchemaForSearchString = schema;
     }
@@ -411,6 +398,12 @@ public class MainActivity extends FragmentActivity implements MainMenuMgr.OnMenu
             	try{
 	                Intent searchIntent = new Intent(Intent.ACTION_VIEW);	                
 	                searchIntent.setData(Uri.parse(dataSchemaForSearchString));
+                    DisplayItem item = new DisplayItem();
+                    item.ns   = "video";
+                    item.type = "search";
+                    item.name = "Search";
+
+                    searchIntent.putExtra("item", item);
 	                startActivity(searchIntent);
             	}catch (Exception e) {
 					Log.e(TAG, e.getMessage());

@@ -4,7 +4,14 @@
 
     <dimen name="tab_content_container_margin_top">30dp</dimen>
     <dimen name="metro_offside">10dp</dimen>
-    <dimen name="ITEM_V_WIDTH">100dp</dimen>
 
+    <dimen name="ITEM_DIVIDE_SIZE">3dp</dimen>
+
+    <dimen name="ITEM_V_WIDTH">115dp</dimen>
+    <dimen name="ITEM_NORMAL_SIZE">115dp</dimen>
+
+    <dimen name="ITEM_H_HEIGHT">115dp</dimen>
+    <dimen name="ITEM_V_HEIGHT">233dp</dimen>
+    <dimen name="ITEM_H_WIDTH">233dp</dimen>
 
 </resources>

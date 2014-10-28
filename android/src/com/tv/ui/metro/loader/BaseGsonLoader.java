@@ -129,6 +129,10 @@ public abstract  class BaseGsonLoader<T> extends Loader<T> {
 
     protected abstract void loadDataByGson();
 
+    protected String mKeyword;
+    public void setSearchKeyword(String key) {
+        mKeyword = key;
+    }
     public static class GsonRequest<TV> extends Request<TV> {
         private final Gson gson = new Gson();
         private final Type type;
